@@ -4,7 +4,7 @@ const ejs = require("ejs");
 
 const app = express();
 
-let items = ["Soap", "Toothbrush", "Sponge"];
+let items = [];
 
 app.use(bodyParser.urlencoded({extended: true}));
 
