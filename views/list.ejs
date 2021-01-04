@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Todo-list</title>
+
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+	<div id="heading" class="box">
+		<h1><%= kindOfDay %></h1>
+	</div>
+
+	<div class="box">
+
+		<% for (item of newListItems) { %>
+			<div class="item">
+				<input type="checkbox">
+				<p> <%= item %> </p>
+			</div>
+		<% } %>
+
+		<form class="item" action="/" method="post">
+			<input type="text" name="newItem" placeholder="Enter an item" autocomplete="off">
+
+			<button type="submit" name="button">+</button>
+		</form>
+
+	</div>
+
+
+</body>
+</html>
