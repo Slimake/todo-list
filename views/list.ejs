@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- Required meta tags -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>Todo-list</title>
 
+	<!-- CSS Stylesheets -->
 	<link rel="stylesheet" href="css/styles.css">
+
+	<!-- Font Awesome -->
+	<script src="https://kit.fontawesome.com/5c38d15388.js" crossorigin="anonymous"></script>
+	<!-- <script>
+		let removebuttons = document.querySelectorAll(".remove");
+		let removeItems = document.querySelectorAll(".remove-item");
+		let removeItem;
+
+		for (let i = 0; i < removeItems.length; i++) {
+			removebuttons[i].addEventListener("click", function() {
+				removeItem = removeItems[i];
+				removeItems[i].remove();
+			});
+		}
+	</script>	 -->	
 </head>
 <body>
 
@@ -20,17 +37,21 @@
 			<div class="item">
 				<input type="checkbox">
 				<p> <%= item %> </p>
+				<form class="move-right" action="/removeitem" method="post">
+					<input type="hidden" name="cancel" value=<%= item %>>
+					<button type="submit" class="btn" name="">
+						<i class="fas fa-times"></i>
+					</button>
+				</form>
 			</div>
 		<% } %>
 
-		<form class="item" action="/" method="post">
+		<form class="item" action="/additem" method="post">
 			<input type="text" name="newItem" placeholder="Enter an item" autocomplete="off">
 
-			<button type="submit" name="button">+</button>
+			<button type="submit" name="">+</button>
 		</form>
 
 	</div>
-
-
 </body>
 </html>

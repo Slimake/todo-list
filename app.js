@@ -26,12 +26,20 @@ app.get("/", function(req, res) {
 	res.render("list", {kindOfDay: day, newListItems: items});
 });
 
-app.post("/", function(req, res) {
+app.post("/additem", function(req, res) {
 	let item = req.body.newItem;
 
 	if (item) {
 		items.push(item);
 	}
+
+	res.redirect("/");
+});
+
+app.post("/removeitem", function(req, res) {
+	let removeItem = req.body.cancel;
+
+	items.splice(items.indexOf(removeItem), 1);
 
 	res.redirect("/");
 });
