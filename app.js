@@ -6,7 +6,6 @@ const date = require(__dirname + "/date.js");
 const app = express();
 
 const items = [];
-const workItems = [];
 
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -14,6 +13,7 @@ app.use(express.static("public"));
 
 app.set('view engine', 'ejs');
 
+	// Get request to root route 
 app.get("/", function(req, res) {
 	
 	const day = date.getDate();
@@ -21,6 +21,7 @@ app.get("/", function(req, res) {
 	res.render("list", {listTitle: day, newListItems: items});
 });
 
+	// Post request to root route 
 app.post("/", function(req, res) {
 	const item = req.body.newItem;
 
@@ -31,6 +32,7 @@ app.post("/", function(req, res) {
 	res.redirect("/");
 });
 
+	// Remove an item from List
 app.post("/removeitem", function(req, res) {
 	const removeItem = req.body.itemRemove;
 
@@ -39,6 +41,7 @@ app.post("/removeitem", function(req, res) {
 
 });
 
+	
 app.listen(process.env.PORT || 3000, function() {
 	console.log("Server started on port 3000") 
 });
