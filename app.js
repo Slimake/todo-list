@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+const date = require(__dirname + "/date.js");
 
 const app = express();
 
-let items = [];
+const items = [];
+const workItems = [];
 
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -13,21 +15,14 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 app.get("/", function(req, res) {
-	let today = new Date();
+	
+	const day = date.getDate();
 
-	let options = {
-		weekday: "short",
-		day: "2-digit",
-		month: "long",
-	};
-
-	let day = today.toLocaleDateString("en-US", options);
-
-	res.render("list", {kindOfDay: day, newListItems: items});
+	res.render("list", {listTitle: day, newListItems: items});
 });
 
-app.post("/additem", function(req, res) {
-	let item = req.body.newItem;
+app.post("/", function(req, res) {
+	const item = req.body.newItem;
 
 	if (item) {
 		items.push(item);
@@ -37,11 +32,11 @@ app.post("/additem", function(req, res) {
 });
 
 app.post("/removeitem", function(req, res) {
-	let removeItem = req.body.cancel;
+	const removeItem = req.body.itemRemove;
 
 	items.splice(items.indexOf(removeItem), 1);
-
 	res.redirect("/");
+
 });
 
 app.listen(process.env.PORT || 3000, function() {
