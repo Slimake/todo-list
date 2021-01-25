@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<!-- Required meta tags -->
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>Todo-list</title>
-
-	<!-- CSS Stylesheets -->
-	<link rel="stylesheet" href="css/styles.css">
-
-	<!-- Font Awesome -->
-	<script src="https://kit.fontawesome.com/5c38d15388.js" crossorigin="anonymous"></script>
-</head>
-<body>
+<%- include("header") -%>
 
 	<div id="heading" class="box">
 		<h1><%= listTitle %></h1>
@@ -24,10 +9,10 @@
 		<% for (item of newListItems) { %>
 			<div class="item">
 				<input type="checkbox">
-				<p> <%= item %> </p>
+				<p> <%= item.name %> </p>
 				<form class="move-right" action="/removeitem" method="post">
-					<input type="hidden" name="itemRemove" value=<%= item %>>
-					<button type="submit" class="btn" name="">
+					<input type="hidden" name="listName" value="<%= listTitle %>">
+					<button type="submit" class="btn" name="itemRemove" value=<%= item._id %>>
 						<i class="fas fa-times"></i>
 					</button>
 				</form>
@@ -37,9 +22,9 @@
 		<form class="item" action="/" method="post">
 			<input type="text" name="newItem" placeholder="Enter an item" autocomplete="off" autofocus="on">
 
-			<button type="submit" name="">+</button>
+			<button type="submit" name="list" value="<%= listTitle %>">+</button>
 		</form>
 
 	</div>
-</body>
-</html>
+
+<%- include("footer") -%>
