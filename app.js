@@ -47,7 +47,7 @@ app.get("/", function(req, res) {
 			});
 			setTimeout(function() {
 				res.redirect("/");
-			}, 1500);
+			}, 800);
 		} else {
 			res.render("list", {
 				listTitle: "Today", 
@@ -73,7 +73,7 @@ app.get("/:customListName", function(req, res) {
 				list.save();
 				setTimeout(function() {
 					res.redirect("/" + customListName);
-				}, 1500);
+				}, 800);
 			} else {
 				// Show an existing list
 				res.render("list", {
@@ -99,12 +99,16 @@ app.post("/", function(req, res) {
 
 		if (listName === "Today") {
 			item.save();
-			res.redirect("/");
+			setTimeout(function() {
+				res.redirect("/");
+			}, 500);
 		} else {
 			List.findOne({ name: listName }, function(err, foundList) {
 				foundList.items.push(item);
 				foundList.save();
-				res.redirect("/" + listName);
+				setTimeout(function() {
+					res.redirect("/" + listName);
+				}, 500);
 			});
 		}
 	}
