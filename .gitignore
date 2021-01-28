@@ -1,6 +1,7 @@
 # Dependency directory
 
 /node_modules
+secrets.js
 npm-debug.log
 .DS_Store
 /*.env
