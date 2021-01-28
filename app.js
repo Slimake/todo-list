@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
-const mongoLogin = require(__dirname + "/secrets.js")
 
 const app = express();
  
@@ -13,7 +12,7 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 // Mongo Database using Mongoose for interaction
-mongoose.connect('mongodb+srv://' + mongoLogin + '@cluster0.819nn.mongodb.net/todolistDB', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect('mongodb+srv://admin-sunday:admin@cluster0.819nn.mongodb.net/todolistDB', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 const itemsSchema = new mongoose.Schema({
 	name: String
