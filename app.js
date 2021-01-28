@@ -40,15 +40,11 @@ app.get("/", function(req, res) {
 	Item.find({}, function (err, foundItems) {
 		if (foundItems.length === 0) {
 			Item.insertMany(defaultItem, function(err) {
-				if (err) {
-					console.log(err);
-				} else {
+				if (!err) {
 					console.log("Successfully saved default items to DB");
+					res.redirect("/");
 				}
 			});
-			setTimeout(function() {
-				res.redirect("/");
-			}, 800);
 		} else {
 			res.render("list", {
 				listTitle: "Today", 
@@ -71,10 +67,11 @@ app.get("/:customListName", function(req, res) {
 					items: defaultItem
 				});
 
-				list.save();
-				setTimeout(function() {
-					res.redirect("/" + customListName);
-				}, 800);
+				list.save(function (err) {
+					if (!err) {
+						res.redirect("/" + customListName);
+					}
+				});
 			} else {
 				// Show an existing list
 				res.render("list", {
@@ -99,17 +96,19 @@ app.post("/", function(req, res) {
 		});
 
 		if (listName === "Today") {
-			item.save();
-			setTimeout(function() {
-				res.redirect("/");
-			}, 500);
+			item.save(function(err) {
+				if (!err) {
+					res.redirect("/");
+				}
+			});
 		} else {
 			List.findOne({ name: listName }, function(err, foundList) {
 				foundList.items.push(item);
-				foundList.save();
-				setTimeout(function() {
-					res.redirect("/" + listName);
-				}, 500);
+				foundList.save(function(err) {
+					if (!err) {
+						res.redirect("/" + listName);
+					}
+				});
 			});
 		}
 	}
