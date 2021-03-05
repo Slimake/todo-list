@@ -1,11 +1,5 @@
 # Dependency directory
 
 /node_modules
-secrets.js
 npm-debug.log
 .DS_Store
-
-# dotenv environment variables file
-.env
-.env.test
-/*.env
